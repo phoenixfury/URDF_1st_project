@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<robot name="myrobo_dog">
+
+<material name="blue">
+    <color rgba="0 0.2 0.76 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.35 0.2 0.15"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    <material name="blue"/>
+    </visual>
+  </link>
+
+<link name="left_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.05"/>
+    <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_arm" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_arm"/>
+    <origin xyz="0.155 0.08 -0.075"/>
+  </joint>
+
+<link name="right_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.05"/>
+    <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_arm" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_arm"/>
+    <origin xyz="0.155 -0.08 -0.075"/>
+  </joint>
+
+<link name="right_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.05"/>
+   <material name="white"/> 
+   </visual>
+  </link>
+
+  <joint name="base_to_right_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_leg"/>
+    <origin xyz="-0.155 -0.08 -0.075"/>
+  </joint>
+
+<link name="left_leg">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 -0.05"/>
+   <material name="white"/> 
+   </visual>
+  </link>
+
+  <joint name="base_to_left_leg" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_leg"/>
+    <origin xyz="-0.155 0.08 -0.075"/>
+  </joint>
+
+<link name="left_wheel1">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+	<origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  <joint name="left_arm_left_wheel1" type="fixed">
+    <parent link="left_arm"/>
+    <child link="left_wheel1"/>
+    <origin xyz="0 0 -0.1"/>
+  </joint>
+
+<link name="right_wheel1">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+	<origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  <joint name="right_arm_right_wheel1" type="fixed">
+    <parent link="right_arm"/>
+    <child link="right_wheel1"/>
+    <origin xyz="0 0 -0.1"/>
+  </joint>
+
+<link name="left_wheel2">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+	<origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  <joint name="left_leg_left_wheel2" type="fixed">
+    <parent link="left_leg"/>
+    <child link="left_wheel2"/>
+    <origin xyz="0 0 -0.1"/>
+  </joint>
+
+<link name="right_wheel2">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+	<origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  <joint name="right_leg_right_wheel2" type="fixed">
+    <parent link="right_leg"/>
+    <child link="right_wheel2"/>
+    <origin xyz="0 0 -0.1"/>
+  </joint>
+
+<link name="head_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.075" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0.866 0" xyz="0 0 0"/>
+    <material name="white"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_head_link" type="revolute">
+    <parent link="base_link"/>
+    <child link="head_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="500.0" lower="-0.866" upper="0" velocity="0.4"/>
+    <origin xyz="0.175 0 0.075"/>
+  </joint>
+
+<link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.06"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.025 0 0.025"/>
+    <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="headlink_to_head" type="continuous">
+    <axis xyz="0 0 1"/>
+    <parent link="head_link"/>
+    <child link="head"/>
+    
+    <origin rpy="0 0 0" xyz="0.01875 0 0.0324 "/>
+  </joint>
+
+</robot>
+
