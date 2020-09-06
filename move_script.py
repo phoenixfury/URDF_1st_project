@@ -10,12 +10,12 @@ desc_flag2 = 0
 def move_joints():
 
     global desc_flag1,desc_flag2
+
     pub = rospy.Publisher('joint_states', JointState, queue_size=10)
-    rospy.init_node('joint_state_publisher', anonymous=True)
+    rospy.init_node('joint_state_publisher')
     rate = rospy.Rate(5) 
     move = JointState()
     move.header = Header()
-    move.header.stamp = rospy.Time.now()
     move.name = ['base_to_head_link', 'headlink_to_head']
     move.position = [ 0, 0]
     move.velocity = []
@@ -27,7 +27,7 @@ def move_joints():
             move.position[0] -= 0.05
             if move.position[0] < -0.866: 
                 desc_flag1 = 0
-        elif  desc_flag1 == 0  :
+        else:
             move.position[0] += 0.05
             if move.position[0] > 0:
 		desc_flag1 = 1
@@ -35,7 +35,7 @@ def move_joints():
             move.position[1] -= 0.1
             if move.position[1] <  -3:
 		desc_flag2 = 0
-        elif desc_flag2 == 0  :
+        else:
             move.position[1] += 0.1
             if move.position[0] > 3:
 		desc_flag2 = 1
